@@ -1,8 +1,8 @@
-* ID del Incidente / Ticket: INC-2026-0424
+* Ticket: INC-2026-0424
 * Fecha/Hora de Detección: 2026-04-24 20:00:00 UTC
 * Severidad: Crítica
 * Host(s) / Usuarios Afectados: app-1 / cuentas root y mysql
-* Fuente de Detección: Revisión de logs de sistema (SSH, auth, sudo, dpkg, apache)
+* Fuente de Detección: Revisión de logs de sistema
 * Analista Asignado: SOC Analyst L2
 
 Resumen Ejecutivo
@@ -34,7 +34,7 @@ La intrusión comenzó con un ataque masivo de autenticación fallida hacia la c
 Artefactos analizados: auth.log  
 Comando usado: `$ grep "Failed password" auth.log`  
 
-![Ataque de fuerza bruta SSH](./images/Captura1.PNG)
+![Ataque de fuerza bruta SSH](./images/Captura1.PNG)  
 *Figura 1: Registros de intentos masivo de inicio de sesion*
 
 
@@ -42,7 +42,7 @@ El acceso se consolidó desde direcciones externas
 Artefactos analizados: auth.log  
 Comando usado: `$ grep "Accepted password" auth.log`  
 
-![Autenticación exitosa root](./images/Captura2.PNG)
+![Autenticación exitosa root](./images/Captura2.PNG)  
 *Figura 2: Registros de inicio de sesion no autorizados*
 
 
@@ -50,7 +50,7 @@ Creación sistemática de perfiles para persistencia:
 Artefactos analizados: auth.log  
 Comando usado: `$ grep "useradd" auth.log`  
 
-![Creación de usuarios packet, fido y wind3str0y](./images/Captura33.PNG)
+![Creación de usuarios packet, fido y wind3str0y](./images/Captura33.PNG)  
 *Figura 3: Registros no autorizados de usuarios y grupos*  
 
 
@@ -58,7 +58,7 @@ Instalación de herramientas desde repositorios:
 Artefactos analizados: dpkg.log  
 Comando usado: `$ grep "installed" dpkg.log`  
 
-![Instalación de Nmap](./images/Captura5nmap.PNG)
+![Instalación de Nmap](./images/Captura5nmap.PNG)  
 *Figura 4: Registros de software instalado no autorizado*
 
 
@@ -66,14 +66,14 @@ Alteración de configuración local para modificar reglas de firewall, permitien
 Artefactos analizados: auth.log  
 Comando usado: `$ grep "iptables" auth.log`  
 
-![Modificación de iptables vía sudo](./images/Captura3.PNG)
+![Modificación de iptables vía sudo](./images/Captura3.PNG)  
 *Figura 5: Registros de modificaciones no autorizadas de firewall*
 
 
 Tráfico web anómalo asociado a escaneos.  
 Comando usado: `$ awk -F'"' '{print $6}' apache2/www-access.log | sort | uniq`  
 
-![User-Agent anómalo pxyscand](./images/Captura6pxhain.PNG)
+![User-Agent anómalo pxyscand](./images/Captura6pxhain.PNG)  
 *Figura 6: Registro de User-Agent no autorizado*
 
 
