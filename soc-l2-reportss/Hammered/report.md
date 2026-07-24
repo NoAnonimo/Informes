@@ -1,3 +1,5 @@
+Encabezado de Control de Metadatos
+----------------------------------
 * Ticket: INC-2026-0424
 * Fecha/Hora de Detección: 2026-04-24 20:00:00 UTC
 * Severidad: Crítica
@@ -38,12 +40,14 @@ Comando usado: `$ grep "Failed password" auth.log`
 *Figura 1: Registros de intentos masivo de inicio de sesion*
 
 
+
 El acceso se consolidó desde direcciones externas  
 Artefactos analizados: auth.log  
 Comando usado: `$ grep "Accepted password" auth.log`  
 
 ![Autenticación exitosa root](./images/Captura2.PNG)  
 *Figura 2: Registros de inicio de sesion no autorizados*
+
 
 
 Creación sistemática de perfiles para persistencia:  
@@ -54,12 +58,14 @@ Comando usado: `$ grep "useradd" auth.log`
 *Figura 3: Registros no autorizados de usuarios y grupos*  
 
 
+
 Instalación de herramientas desde repositorios:  
 Artefactos analizados: dpkg.log  
 Comando usado: `$ grep "installed" dpkg.log`  
 
 ![Instalación de Nmap](./images/Captura5nmap.PNG)  
 *Figura 4: Registros de software instalado no autorizado*
+
 
 
 Alteración de configuración local para modificar reglas de firewall, permitiendo tráfico en puertos inusuales (ej. 2424).  
@@ -70,11 +76,13 @@ Comando usado: `$ grep "iptables" auth.log`
 *Figura 5: Registros de modificaciones no autorizadas de firewall*
 
 
+
 Tráfico web anómalo asociado a escaneos.  
 Comando usado: `$ awk -F'"' '{print $6}' apache2/www-access.log | sort | uniq`  
 
 ![User-Agent anómalo pxyscand](./images/Captura6pxhain.PNG)  
 *Figura 6: Registro de User-Agent no autorizado*
+
 
 
 Vulnerabilidad crítica en bases de datos locales comprobada mediante la siguiente consulta:
