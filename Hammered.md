@@ -35,42 +35,42 @@ Análisis Técnico y Evidencia
 ----------------------------
 La intrusión comenzó con un ataque masivo de autenticación fallida. Evidencia extraída del archivo referenciado como Captura1.jpg:
 
-![Ataque de fuerza bruta SSH](Captura1.jpg)
+![Ataque de fuerza bruta SSH](./images/Captura1.jpg)
 
 $ grep "Failed password" auth.log
 Apr 18 18:22:09 app-1 sshd[5266]: Failed password for root...
 
 El acceso se consolidó desde direcciones externas. Evidencia extraída del archivo referenciado como Captura2.PNG:
 
-![Autenticación exitosa root](Captura2.PNG)
+![Autenticación exitosa root](./images/Captura2.PNG)
 
 $ grep "Accepted password" auth.log
 ...
 
 Alteración de configuración local para modificar reglas de firewall, permitiendo tráfico en puertos inusuales (ej. 2424). Evidencia extraída del archivo referenciado como Captura3.PNG:
 
-![Modificación de iptables vía sudo](Captura3.PNG)
+![Modificación de iptables vía sudo](./images/Captura3.PNG)
 
 $ grep "iptables" auth.log
 ...
 
 Instalación de herramientas desde repositorios. Evidencia extraída del archivo referenciado como Captura5nmap.PNG:
 
-![Instalación de Nmap](Captura5nmap.PNG)
+![Instalación de Nmap](./images/Captura5nmap.PNG)
 
 $ grep "installed" dpkg.log
 ...
 
 Tráfico web anómalo asociado a escaneos. Evidencia extraída del archivo referenciado como Captura6pxhain.PNG:
 
-![User-Agent anómalo pxyscand](Captura6pxhain.PNG)
+![User-Agent anómalo pxyscand](./images/Captura6pxhain.PNG)
 
 $ awk -F'"' '{print $6}' apache2/www-access.log | sort | uniq
 ...
 
 Creación sistemática de perfiles para persistencia. Evidencia extraída del archivo referenciado como Captura33.PNG:
 
-![Creación de usuarios packet, fido y wind3str0y](Captura33.PNG)
+![Creación de usuarios packet, fido y wind3str0y](./images/Captura33.PNG)
 
 $ grep "useradd" auth.log
 ...
