@@ -3,17 +3,17 @@ Encabezado de Control de Metadatos
 * Ticket: INC-2026-0424
 * Fecha/Hora de Detección: 2026-04-24 20:00:00 UTC
 * Severidad: Crítica
-* Host(s) / Usuarios Afectados: app-1 / cuentas root y mysql
-* Fuente de Detección: Revisión de logs de sistema
+* Hosts y Usuarios Afectados: cuentas root
+* Fuente de Detección: auth.log, dpkg.log, www-accces.log
 * Analista Asignado: SOC Analyst L2
 
 Resumen Ejecutivo
 -----------------
-Un atacante externo comprometió el servidor de producción app-1 mediante un ataque de fuerza bruta por SSH, logrando acceso a la cuenta root. Según investigaciones en fuentes oficiales, la causa raíz fue una configuración insegura en el servicio SSH (PermitRootLogin yes), documentada en las directivas de OpenSSH (https://www.openssh.com/sshd_config.5.html). El impacto es crítico: el actor de amenazas tomó control total, creó cuentas ocultas con privilegios UID 0, modificó el firewall e instaló herramientas C2. El host fue aislado.
+Un atacante logro acceso root por medio fuerza bruta via SSH puerto 22. El impacto es crítico: el actor de amenazas tomó control total, creó cuentas ocultas con privilegios UID 0, modificó el firewall e instaló herramientas C2. El host fue aislado.
 
 Línea de Tiempo del Ataque
 --------------------------
-* 18-Apr 18:22:09 UTC - Primer intento de fuerza bruta contra root.
+* 18-Apr 18:22:09 UTC - Primer intento de fuerza bruta contra root via SSH.
 * 19-Apr 05:41:44 UTC - Inicio de sesión exitoso desde IPs externas.
 * 19-Apr 22:38:00 UTC - Creación de cuentas no autorizadas.
 * 19-Apr 22:54:00 UTC - Instalación de entorno de compilación.
