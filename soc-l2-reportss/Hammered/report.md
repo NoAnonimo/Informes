@@ -1,9 +1,9 @@
-ID del Incidente / Ticket: INC-2026-0424
-Fecha/Hora de Detección: 2026-04-24 20:00:00 UTC
-Severidad: Crítica
-Host(s) / Usuarios Afectados: app-1 / cuentas root y mysql
-Fuente de Detección: Revisión de logs de sistema (SSH, auth, sudo, dpkg, apache)
-Analista Asignado: SOC Analyst L2
+* ID del Incidente / Ticket: INC-2026-0424
+* Fecha/Hora de Detección: 2026-04-24 20:00:00 UTC
+* Severidad: Crítica
+* Host(s) / Usuarios Afectados: app-1 / cuentas root y mysql
+* Fuente de Detección: Revisión de logs de sistema (SSH, auth, sudo, dpkg, apache)
+* Analista Asignado: SOC Analyst L2
 
 Resumen Ejecutivo
 -----------------
