@@ -32,7 +32,7 @@ Análisis Técnico y Evidencia
 ----------------------------
 La intrusión comenzó con un ataque masivo de autenticación fallida. Evidencia extraída del archivo referenciado como Captura1.jpg:
 
-![Ataque de fuerza bruta SSH](./images/Captura1.jpg)
+![Ataque de fuerza bruta SSH](./images/Captura1.PNG)
 
 $ grep "Failed password" auth.log
 Apr 18 18:22:09 app-1 sshd[5266]: Failed password for root...
