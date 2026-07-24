@@ -30,59 +30,67 @@ Indicadores de Compromiso (IoCs)
 
 Análisis Técnico y Evidencia
 ----------------------------
-La intrusión comenzó con un ataque masivo de autenticación fallida. Evidencia extraída del archivo referenciado como Captura1.jpg:
+La intrusión comenzó con un ataque masivo de autenticación fallida hacia la cuenta root via SSH.
+Artefactos analizados: auth.log
+Comando usado: `$ grep "Failed password" auth.log`
 
 ![Ataque de fuerza bruta SSH](./images/Captura1.PNG)
+Figura 1: Registros de intentos masivo de inicio de sesion
 
-$ grep "Failed password" auth.log
-Apr 18 18:22:09 app-1 sshd[5266]: Failed password for root...
 
-El acceso se consolidó desde direcciones externas. Evidencia extraída del archivo referenciado como Captura2.PNG:
+El acceso se consolidó desde direcciones externas
+Artefactos analizados: auth.log
+Comando usado: `$ grep "Accepted password" auth.log`
 
 ![Autenticación exitosa root](./images/Captura2.PNG)
+Figura 2: Registros de inicio de sesion no autorizados
 
-$ grep "Accepted password" auth.log
 
-Creación sistemática de perfiles para persistencia. Evidencia extraída del archivo referenciado como Captura33.PNG:
+Creación sistemática de perfiles para persistencia:
+Artefactos analizados: auth.log
+Comando usado: `$ grep "useradd" auth.log`
 
 ![Creación de usuarios packet, fido y wind3str0y](./images/Captura33.PNG)
+Figura 3: Registros no autorizados de usuarios y grupos
 
-$ grep "useradd" auth.log
 
-Instalación de herramientas desde repositorios. Evidencia extraída del archivo referenciado como Captura5nmap.PNG:
+Instalación de herramientas desde repositorios:
+Artefactos analizados: dpkg.log
+Comando usado: `$ grep "installed" dpkg.log`
 
 ![Instalación de Nmap](./images/Captura5nmap.PNG)
+Figura 4: Registros de software instalado no autorizado
 
-$ grep "installed" dpkg.log
 
-Alteración de configuración local para modificar reglas de firewall, permitiendo tráfico en puertos inusuales (ej. 2424). Evidencia extraída del archivo referenciado como Captura3.PNG:
+Alteración de configuración local para modificar reglas de firewall, permitiendo tráfico en puertos inusuales (ej. 2424).
+Artefactos analizados: auth.log
+Comando usado: `$ grep "iptables" auth.log`
 
 ![Modificación de iptables vía sudo](./images/Captura3.PNG)
+Figura 5: Registros de modificaciones no autorizadas de firewall
 
-$ grep "iptables" auth.log
 
-Tráfico web anómalo asociado a escaneos. Evidencia extraída del archivo referenciado como Captura6pxhain.PNG:
+Tráfico web anómalo asociado a escaneos.
+Comando usado: `$ awk -F'"' '{print $6}' apache2/www-access.log | sort | uniq`
 
 ![User-Agent anómalo pxyscand](./images/Captura6pxhain.PNG)
+Figura 6: Registro de User-Agent no autorizado
 
-$ awk -F'"' '{print $6}' apache2/www-access.log | sort | uniq
-...
 
 Vulnerabilidad crítica en bases de datos locales comprobada mediante la siguiente consulta:
-
-$ SELECT user, host, password FROM mysql.user WHERE user='root' AND password='';
+Comando usado: `$ SELECT user, host, password FROM mysql.user WHERE user='root' AND password='';`
 
 Mapeo de Técnicas (MITRE ATT&CK)
 --------------------------------
 Según fuentes oficiales del framework MITRE (https://attack.mitre.org), se identifican las siguientes tácticas y subtécnicas:
 | ID MITRE | Técnica | Descripción del Caso |
 | --- | --- | --- |
-| [T1110.001](https://attack.mitre.org/techniques/T1110/001/) | Password Guessing | Intentos masivos sobre el puerto 22. |
-| [T1078.003](https://attack.mitre.org/techniques/T1078/003/) | Local Accounts | Uso de credenciales root obtenidas para operar. |
-| [T1098](https://attack.mitre.org/techniques/T1098/) | Account Manipulation | Creación de usuarios con privilegios elevados (UID=0). |
-| [T1562.004](https://attack.mitre.org/techniques/T1562/004/) | Disable or Modify System Firewall | Modificación de iptables vía sudo para permitir conexiones C2. |
-| [T1046](https://attack.mitre.org/techniques/T1046/) | Network Service Discovery | Instalación y uso de nmap 4.53-3. |
-| [T1071.001](https://attack.mitre.org/techniques/T1071/001/) | Web Protocols | Uso de IRC (eggdrop) para Comando y Control. |
+| T1110.001 | Password Guessing | Intentos masivos sobre el puerto 22. |
+| T1078.003 | Local Accounts | Uso de credenciales root obtenidas para operar. |
+| T1098 | Account Manipulation | Creación de usuarios con privilegios elevados (UID=0). |
+| T1562.004 | Disable or Modify System Firewall | Modificación de iptables vía sudo para permitir conexiones C2. |
+| T1046 | Network Service Discovery | Instalación y uso de nmap 4.53-3. |
+| T1071.001 | Web Protocols | Uso de IRC (eggdrop) para Comando y Control. |
 
 Acciones de Respuesta, Remediación y Ajustes
 --------------------------------------------
