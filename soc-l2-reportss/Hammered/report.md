@@ -42,7 +42,12 @@ El acceso se consolidó desde direcciones externas. Evidencia extraída del arch
 ![Autenticación exitosa root](./images/Captura2.PNG)
 
 $ grep "Accepted password" auth.log
-...
+
+Creación sistemática de perfiles para persistencia. Evidencia extraída del archivo referenciado como Captura33.PNG:
+
+![Creación de usuarios packet, fido y wind3str0y](./images/Captura33.PNG)
+
+$ grep "useradd" auth.log
 
 Alteración de configuración local para modificar reglas de firewall, permitiendo tráfico en puertos inusuales (ej. 2424). Evidencia extraída del archivo referenciado como Captura3.PNG:
 
@@ -63,13 +68,6 @@ Tráfico web anómalo asociado a escaneos. Evidencia extraída del archivo refer
 ![User-Agent anómalo pxyscand](./images/Captura6pxhain.PNG)
 
 $ awk -F'"' '{print $6}' apache2/www-access.log | sort | uniq
-...
-
-Creación sistemática de perfiles para persistencia. Evidencia extraída del archivo referenciado como Captura33.PNG:
-
-![Creación de usuarios packet, fido y wind3str0y](./images/Captura33.PNG)
-
-$ grep "useradd" auth.log
 ...
 
 Vulnerabilidad crítica en bases de datos locales comprobada mediante la siguiente consulta:
