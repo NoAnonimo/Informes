@@ -79,12 +79,14 @@ $ SELECT user, host, password FROM mysql.user WHERE user='root' AND password='';
 Mapeo de Técnicas (MITRE ATT&CK)
 --------------------------------
 Según fuentes oficiales del framework MITRE (https://attack.mitre.org), se identifican las siguientes tácticas y subtécnicas:
-* T1110.001 - Brute Force: Password Guessing: Intentos masivos sobre el puerto 22.
-* T1078.003 - Valid Accounts: Local Accounts: Uso de credenciales root obtenidas para operar.
-* T1098 - Account Manipulation: Creación de usuarios con privilegios elevados (UID=0).
-* T1562.004 - Impair Defenses: Disable or Modify System Firewall: Modificación de iptables vía sudo para permitir conexiones C2.
-* T1046 - Network Service Discovery: Instalación y uso de nmap 4.53-3.
-* T1071.001 - Application Layer Protocol: Web Protocols: Uso de IRC (eggdrop) para Comando y Control.
+| ID MITRE | Técnica | Descripción del Caso |
+| --- | --- | --- |
+| [T1110.001](https://attack.mitre.org/techniques/T1110/001/) | Password Guessing | Intentos masivos sobre el puerto 22. |
+| [T1078.003](https://attack.mitre.org/techniques/T1078/003/) | Local Accounts | Uso de credenciales root obtenidas para operar. |
+| [T1098](https://attack.mitre.org/techniques/T1098/) | Account Manipulation | Creación de usuarios con privilegios elevados (UID=0). |
+| [T1562.004](https://attack.mitre.org/techniques/T1562/004/) | Disable or Modify System Firewall | Modificación de iptables vía sudo para permitir conexiones C2. |
+| [T1046](https://attack.mitre.org/techniques/T1046/) | Network Service Discovery | Instalación y uso de nmap 4.53-3. |
+| [T1071.001](https://attack.mitre.org/techniques/T1071/001/) | Web Protocols | Uso de IRC (eggdrop) para Comando y Control. |
 
 Acciones de Respuesta, Remediación y Ajustes
 --------------------------------------------
